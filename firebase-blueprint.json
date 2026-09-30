@@ -1,0 +1,167 @@
+{
+  "entities": {
+    "Client": {
+      "title": "Client",
+      "description": "Informações administrativas completas do cliente de placa NFC Wi-Fi",
+      "type": "object",
+      "properties": {
+        "publicId": {
+          "type": "string",
+          "description": "Identificador público aleatório único e permanente para a tag NFC",
+          "minLength": 6,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "businessName": {
+          "type": "string",
+          "description": "Nome do estabelecimento comercial",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "ssid": {
+          "type": "string",
+          "description": "Nome da rede Wi-Fi",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "wifiPassword": {
+          "type": "string",
+          "description": "Senha da rede Wi-Fi (opcional caso seja aberta)",
+          "maxLength": 128
+        },
+        "logoUrl": {
+          "type": "string",
+          "description": "URL da logo armazenada no Firebase Storage",
+          "maxLength": 2048
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Cor hexadecimal personalizada de fundo para o cartão digital",
+          "maxLength": 16,
+          "pattern": "^#[0-9a-fA-F]{3,8}$"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Status de ativação da página pública"
+        },
+        "customTitle": {
+          "type": "string",
+          "description": "Título customizado exibido no topo da página pública",
+          "maxLength": 120
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Instruções adicionais para o cliente na página pública",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp de criação do registro"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp da última atualização"
+        }
+      },
+      "required": ["publicId", "businessName", "ssid", "active", "backgroundColor"]
+    },
+    "PublicWifiPage": {
+      "title": "PublicWifiPage",
+      "description": "Dados públicos projetados para exibição na página /wifi/{publicId}",
+      "type": "object",
+      "properties": {
+        "publicId": {
+          "type": "string",
+          "description": "ID público do estabelecimento correspondente ao ID do documento",
+          "minLength": 6,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "businessName": {
+          "type": "string",
+          "description": "Nome do estabelecimento",
+          "maxLength": 120
+        },
+        "ssid": {
+          "type": "string",
+          "description": "Nome da rede Wi-Fi",
+          "maxLength": 64
+        },
+        "wifiPassword": {
+          "type": "string",
+          "description": "Senha da rede Wi-Fi",
+          "maxLength": 128
+        },
+        "logoUrl": {
+          "type": "string",
+          "description": "URL da imagem de logo",
+          "maxLength": 2048
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Cor hexadecimal de fundo",
+          "maxLength": 16
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Indica se o estabelecimento está com acesso liberado"
+        },
+        "customTitle": {
+          "type": "string",
+          "description": "Título customizado",
+          "maxLength": 120
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Instruções extras",
+          "maxLength": 500
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp da última atualização"
+        }
+      },
+      "required": ["publicId", "businessName", "ssid", "active", "backgroundColor"]
+    },
+    "AdminWhitelist": {
+      "title": "AdminWhitelist",
+      "description": "Registro de e-mails autorizados para gestão administrativa",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Endereço de e-mail autorizado",
+          "maxLength": 256
+        },
+        "role": {
+          "type": "string",
+          "description": "Nível de acesso (ex: admin)",
+          "maxLength": 32
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de autorização"
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/clients/{clientId}": {
+      "schema": "#/entities/Client",
+      "description": "Coleção de clientes privados com acesso restrito aos administradores autenticados"
+    },
+    "/publicWifiPages/{publicId}": {
+      "schema": "#/entities/PublicWifiPage",
+      "description": "Coleção de projeção pública para acesso individual e direto via URL NFC /wifi/{publicId}. Listagem bloqueada por regras."
+    },
+    "/admins/{uid}": {
+      "schema": "#/entities/AdminWhitelist",
+      "description": "Documentos de UIDs de administradores verificados no Firestore"
+    }
+  }
+}

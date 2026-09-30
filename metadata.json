@@ -1,0 +1,8 @@
+{
+  "name": "NFC Wi-Fi Connect",
+  "description": "Sistema profissional para gerenciamento de clientes e conexões Wi-Fi via placas NFC.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

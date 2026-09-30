@@ -1,0 +1,12 @@
+{
+  "projectId": "gestao-wifi-nfc",
+  "appId": "1:801273265341:web:f523a1b3f81998fc9b8bd4",
+  "apiKey": "AIzaSyCS2bBP2w__EO7CzJUTAuKJVmtsyXsSLnw",
+  "authDomain": "gestao-wifi-nfc.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-dc10553c-c1b4-47e0-b091-e6209d4733f2",
+  "storageBucket": "gestao-wifi-nfc.firebasestorage.app",
+  "messagingSenderId": "801273265341",
+  "measurementId": "",
+  "oAuthClientId": "801273265341-ggqfe0h0f52pqk6inu8m9uf21vtnherj.apps.googleusercontent.com",
+  "recaptchaSiteKey": ""
+}
